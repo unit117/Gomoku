@@ -1,5 +1,6 @@
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
     // Instance variables
@@ -153,5 +154,28 @@ public class Board {
     public void stopAI() {
         gui.startAI(false);
     }
+
+    public List<int[]> getPossibleMoves() {
+        List<int[]> possibleMoves = new ArrayList<>();
+        for (int i = 0; i < boardMatrix.length; i++) {
+            for (int j = 0; j < boardMatrix.length; j++) {
+                if (boardMatrix[i][j] == EMPTY) {
+                    possibleMoves.add(new int[]{i, j});
+                }
+            }
+        }
+        return possibleMoves;
+    }
+
+    public boolean isTerminal() {
+        // This is a simple placeholder. In a real Gomoku game, you would need to check if there are five pieces in a row for either player.
+        return getPossibleMoves().isEmpty();
+    }
+
+    public int getReward(int player) {
+        // This is a simple placeholder. In a real Gomoku game, you would need to check if the player has won and return 1 if yes, 0 if the game is a draw, and -1 if the player has lost.
+        return 0;
+    }
+
 
 }
