@@ -1,11 +1,37 @@
-##Gomoku AI
+Here is a revised README for the Gomoku AI project:
 
-This project involves the design and implementation of a game of Gomoku and its AI. The game logic and board are stored in the class Board, represented as a 2D array of integers with three possible values: 0 (EMPTY), 1 (WHITE), or 2 (BLACK). The SimpleAI class uses a basic approach to game logic, looking for cases of three in a row and making a random move if none are found.
+# Gomoku AI
 
-The MainGUI class creates the game's frontend interface with user-friendly components like radio buttons and labels. The Minimax algorithm is implemented in the code, creating a game tree of possible moves with an evaluation function and Alpha-Beta Pruning optimization to determine the best move. The code also includes searching for winning moves before performing a full search, useful when there are obvious winning moves available.
+This project implements an artificial intelligence to play the game of Gomoku (also known as Five in a Row) against a human player. 
 
-The minimaxSearchAB method is the core of the Minimax algorithm, recursively exploring all possible moves, simulating alternate turns between the AI and player. Alpha and Beta values are used to prune the search tree. The getNextMove method starts this search, and the evaluation function getScore assigns scores to the board state based on the sequence of pieces horizontally, vertically, and diagonally.
+## Overview
 
-The Monte Carlo Tree Search (MCTS) is a heuristic search algorithm that uses randomness and simulation to make decisions. This algorithm constructs a search tree based on statistical analysis of stochastic simulations, consisting of four steps: selection, expansion, simulation, and backpropagation. For Gomoku, MCTS simulates many potential games with randomly chosen moves, using the results to inform the next move.
+The game logic and board are represented in the `Board` class as a 2D array of integers, with 0 for empty spots, 1 for white pieces, and 2 for black pieces. The `BoardGUI` class handles displaying the graphical game board and pieces in a Swing GUI.
 
-To play against the AI, run the Minimax class, with difficulty levels set by depth. Higher depth means the AI can see further and explore more potential game states. The project is available on Github at https://github.com/unit117/Gomoku.
+The AI opponent uses the Minimax algorithm with alpha-beta pruning to calculate the best move by searching possible future game states. The `Minimax` class contains the implementation, evaluating board positions with a score and searching the game tree to a configurable depth. 
+
+The `Game` class brings everything together to control game flow and alternate moves between the AI and human player. It detects winners, handles user mouse clicks for moves, and requests the next AI move from `Minimax`.
+
+The `MainGUI` class provides a simple Swing interface to configure game options like the AI difficulty level and whether the human or AI plays first.
+
+## Usage
+
+To play against the AI:
+
+1. Run the `Main` class 
+2. Configure the options in the setup panel:
+   - Select the AI difficulty (search depth)
+   - Choose whether human or AI plays first
+3. Click "Start Game" to begin
+4. Click on the game board to place your pieces
+5. The AI will automatically calculate and make a move after each human turn
+
+The higher the difficulty, the deeper the AI will search, allowing it to play better but slowing it down.
+
+## Customizing the AI
+
+The evaluation function in `Minimax` that scores board positions can be adjusted to tweak the AI logic. Additional optimizations like move ordering and caching can also be added. 
+
+An alternative algorithm like Monte Carlo Tree Search could be implemented for different AI behavior. The modular structure makes it easy to experiment with new approaches.
+
+Overall this project provides a nice foundation for developing a game-playing AI bot!
