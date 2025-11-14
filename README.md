@@ -18,7 +18,7 @@ The `MainGUI` class provides a simple Swing interface to configure game options 
 
 To play against the AI:
 
-1. Run the `Main` class 
+1. Run the `Main` class
 2. Configure the options in the setup panel:
    - Select the AI difficulty (search depth)
    - Choose whether human or AI plays first
@@ -35,3 +35,15 @@ The evaluation function in `Minimax` that scores board positions can be adjusted
 An alternative algorithm like Monte Carlo Tree Search could be implemented for different AI behavior. The modular structure makes it easy to experiment with new approaches.
 
 Overall this project provides a nice foundation for developing a game-playing AI bot!
+
+## iOS Client
+
+The `ios/GomokuIOS` directory contains a brand-new SwiftUI client that brings Gomoku to iPhone and iPad with:
+
+- Three AI levels powered by the shared evaluation logic
+- Online multiplayer over Multipeer Connectivity with retract (undo) negotiation
+- User profiles backed by on-device storage that track wins/losses and streaks
+- A fully zoomable, pannable board with standard star-point markings for precise stone placement
+- Profile and stats dashboards that surface overall performance and allow players to opt into or out of retract prompts
+
+To explore the iOS version, open the folder in Xcode 15 or newer and run the `GomokuIOSApp` target on a simulator or device.
