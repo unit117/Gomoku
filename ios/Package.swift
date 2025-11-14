@@ -1,13 +1,12 @@
 // swift-tools-version: 5.9
 import PackageDescription
+#if canImport(AppleProductTypes)
 import AppleProductTypes
+#endif
 
-let package = Package(
-    name: "GomokuIOS",
-    platforms: [
-        .iOS(.v16)
-    ],
-    products: [
+private let packageProducts: [Product] = {
+#if canImport(AppleProductTypes)
+    return [
         .iOSApplication(
             name: "GomokuIOS",
             targets: ["GomokuIOS"],
@@ -25,7 +24,27 @@ let package = Package(
                 .landscapeRight
             ]
         )
+    ]
+#else
+    // Fall back to a library product so the manifest still resolves when
+    // Apple-only helpers such as `AppleProductTypes` are unavailable (e.g.,
+    // on non-Xcode Swift toolchains). Xcode 15+ will ignore this branch and
+    // expose the iOS application scheme as usual.
+    return [
+        .library(
+            name: "GomokuIOS",
+            targets: ["GomokuIOS"]
+        )
+    ]
+#endif
+}()
+
+let package = Package(
+    name: "GomokuIOS",
+    platforms: [
+        .iOS(.v16)
     ],
+    products: packageProducts,
     targets: [
         .executableTarget(
             name: "GomokuIOS",
